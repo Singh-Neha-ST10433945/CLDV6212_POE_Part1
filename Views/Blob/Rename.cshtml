@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Rename Blob";
+}
+<h3 class="mb-3">Rename "@ViewBag.OldName"</h3>
+
+<form asp-action="Rename" method="post">
+    <input type="hidden" name="oldName" value="@ViewBag.OldName" />
+    <div class="mb-3">
+        <label class="form-label">New name</label>
+        <input class="form-control" name="newName" required />
+    </div>
+    <button class="btn btn-primary">Rename</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>

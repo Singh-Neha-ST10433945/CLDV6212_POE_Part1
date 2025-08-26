@@ -1,0 +1,110 @@
+/* === Color theme === */
+:root {
+    --bg-beige: #f6f1e9;
+    --bg-card: #ffffff;
+    --text: #2a2a2a;
+    --muted: #6b7280;
+    --brand: #8b7355;
+    --brand-dark: #6f5c43;
+}
+
+/* === Typography === */
+body {
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg-beige) no-repeat center/cover fixed;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+/* === Optional paper background photo (requires /img/bg.jpg) === */
+body.has-bg {
+    background-image: linear-gradient(rgba(255,255,255,.78), rgba(255,255,255,.78)), url('/img/bg.jpg');
+}
+
+/* Layout helpers */
+.container-narrow {
+    max-width: 1180px;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(180deg,#fff,#f7f3ed);
+    border-bottom: 1px solid #eadfce;
+}
+
+    .navbar .navbar-brand {
+        font-weight: 700;
+        color: var(--brand) !important;
+    }
+
+    .navbar .nav-link {
+        color: #4b5563 !important;
+    }
+
+        .navbar .nav-link.active {
+            color: var(--brand) !important;
+            font-weight: 600;
+        }
+
+/* Cards & tables */
+.card {
+    border: 1px solid #eadfce;
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+
+.card-header {
+    background: #fbf8f3;
+    border-bottom: 1px solid #eadfce;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+    .btn-primary:hover {
+        background-color: var(--brand-dark);
+        border-color: var(--brand-dark);
+    }
+
+/* Footer */
+.site-footer {
+    background: #fbf8f3;
+    border-top: 1px solid #eadfce;
+    color: var(--muted);
+}
+
+/* Hero banner (centered) */
+.hero {
+    text-align: center;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    padding: 2.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: #fbf8f3;
+}
+
+    .hero h1 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        margin: 0 0 .5rem 0;
+        color: #3b352c;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        margin: 0;
+        color: #6b645a;
+    }
+
+/* Uniform card thumbnails */
+.card-thumb {
+    width: 80px;
+    height: 80px;

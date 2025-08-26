@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ABCretailStorageApp.Models.CustomerProfile>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header fw-bold">Add Customer (Customer Profiles)</div>
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-2">
+            <div class="col-md-3">
+                <input class="form-control" name="fullName" placeholder="Full name" required />
+            </div>
+            <div class="col-md-3">
+                <input class="form-control" name="email" placeholder="Email" required />
+            </div>
+            <div class="col-md-3">
+                <input class="form-control" name="fav" placeholder="Favorite product" />
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="tier">
+                    <option>Bronze</option>
+                    <option>Silver</option>
+                    <option>Gold</option>
+                </select>
+            </div>
+            <div class="col-md-1 d-grid">
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header fw-bold">Customer Profiles</div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Fav</th>
+                    <th>Tier</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.FullName</td>
+                        <td>@c.Email</td>
+                        <td>@c.FavoriteProduct</td>
+                        <td>@c.LoyaltyTier</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary"
+                               asp-action="Edit"
+                               asp-route-partitionKey="@c.PartitionKey"
+                               asp-route-rowKey="@c.RowKey">Edit</a>
+
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="partitionKey" value="@c.PartitionKey" />
+                                <input type="hidden" name="rowKey" value="@c.RowKey" />
+                                <button class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Delete this customer?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

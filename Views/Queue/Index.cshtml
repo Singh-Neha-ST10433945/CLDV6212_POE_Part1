@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ABCretailStorageApp.Services.StorageService.QueueMessageDto>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header fw-bold">Create Update (Order Tracking)</div>
+    <div class="card-body">
+        <form asp-action="Send" method="post" class="row g-2">
+            @Html.AntiForgeryToken()
+            <div class="col-md-8">
+                <input class="form-control" name="message" placeholder="Related image/file name" required />
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="status">
+                    <option>Processing</option>
+                    <option>Packed</option>
+                    <option>Shipped</option>
+                    <option>Failed</option>
+                </select>
+            </div>
+            <div class="col-md-1 d-grid">
+                <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header fw-bold">Recent Order/Inventory Events</div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Text</th>
+                    <th>Inserted</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td><code>@m.Text</code></td>
+                        <td>@(m.InsertedOn?.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") ?? "-")</td>
+                        <td class="text-end">
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="messageId" value="@m.Id" />
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

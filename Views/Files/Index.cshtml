@@ -1,0 +1,53 @@
+﻿@model IEnumerable<string>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header fw-bold">Upload Document (Contracts &amp; Documents)</div>
+    <div class="card-body">
+        <form asp-action="Upload" method="post" enctype="multipart/form-data" class="d-flex gap-2">
+            @Html.AntiForgeryToken()
+            <input class="form-control" type="file" name="file" required />
+            <button class="btn btn-primary" type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header fw-bold">Contracts &amp; Documents</div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var file in Model)
+                {
+                    <tr>
+                        <td>@file</td>
+                        <td class="text-end">
+                            <!-- Delete -->
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <!-- 👇 MUST be `name` to match controller parameter -->
+                                <input type="hidden" name="name" value="@file" />
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+
+                            <!-- Rename -->
+                            <form asp-action="Rename" method="post" class="d-inline ms-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="oldName" value="@file" />
+                                <input class="form-control form-control-sm d-inline w-auto"
+                                       name="newName" placeholder="new-name.txt" required />
+                                <button class="btn btn-sm btn-outline-dark ms-1">Rename</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
